@@ -1,0 +1,133 @@
+MOVIE POLL
+
+{
+    _id: (id),
+    title: String,
+    description: String,
+    creation_date: Date,
+    user_id: (user id),
+    username: String,
+    edit_deadline: Timestamp,
+    vote_deadline: Date,
+    genre: String,
+    options: [
+        {
+            id: (id),
+            title: String,
+            summary: String,
+            stars: String,
+            imdb_id: String,
+            rating: String,
+            trailer: String,
+            wikipedia: String,
+            genres: [String],
+            votes: Int
+            rank_votes: [Int]
+        }
+    ],
+    comments: [
+        {
+            id: (id),
+            user_id: (user id),
+            username: String,
+            option: (option id),
+            title: String,
+            content: String,
+            creation_date: Date
+        }
+    ]
+}
+
+ACTOR/DIRECTOR POLL
+
+{
+    _id: (id),
+    title: String,
+    description: String,
+    creation_date: Date,
+    user_id: (user id),
+    username: String,
+    edit_deadline: Timestamp,
+    vote_deadline: Date,
+    with_movie: Boolean
+    options: [
+        {
+            id: (id),
+            name: String,
+            roles: String,
+            imdb_id: String,
+            wikipedia: String,
+            image: String,
+            highlighted_movie: {
+                id: (id),
+                title: String,
+                role: String,
+                imdb_id: String,
+                wikipedia: String,
+                trailer: String,
+                image: String,
+                rating: String
+            }
+            votes: Int
+        }
+    ],
+    comments: [
+        {
+            id: (id),
+            user_id: (user id),
+            username: String,
+            option: (option id),
+            name: String,
+            content: String,
+            creation_date: Date
+        }
+    ]
+}
+
+USER
+
+{
+    _id: (id),
+    email: String,
+    password: String,
+    username: String,
+    polls: [
+        {
+            id: (poll id),
+            title: String,
+            description: String,
+            publish_date: Date,
+            votes: Int,
+            comments: Int
+        }
+    ]
+    comments: [
+        id: (comment id),
+        poll_id: (poll id),
+        poll_title: String,
+        title: String,
+        content: String,
+        creation_date: Date
+    ]
+    votes: [ (poll id) ]
+}
+
+
+GENRE
+
+{
+    _id: (id),
+    polls: [
+        {
+            id: (poll id),
+            title: String,
+            description: String,
+            user_id: (user id),
+            username: String,
+            creation_date: Date,
+            votes: Int,
+            comments: Int
+        }
+    ]
+}
+
