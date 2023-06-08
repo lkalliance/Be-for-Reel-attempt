@@ -1,7 +1,8 @@
 const mongoose = import("mongoose");
 import { Schema, model } from "mongoose";
+import { comment } from "./index";
 
-const movieOption = new Schema({
+export const movieOption = new Schema({
   title: {
     type: String,
     required: true,
@@ -18,14 +19,6 @@ const movieOption = new Schema({
   rank_votes: [Number],
 });
 
-const movieComment = new Schema({
-  user_id: { type: String, required: true },
-  username: { type: String, required: true },
-  option: { type: String, required: true },
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-});
-
 const moviePollSchema = new Schema({
   title: {
     type: String,
@@ -38,7 +31,7 @@ const moviePollSchema = new Schema({
   username: { type: String, required: true },
   genre: { type: String },
   options: [movieOption],
-  comments: [movieComment],
+  comments: [comment],
 });
 
 export const MoviePoll = model("MoviePoll", moviePollSchema);
