@@ -1,0 +1,21 @@
+{
+  "name": "be-for-reel",
+  "version": "0.1.0",
+  "description": "A movie poll site for movie enthusiasts by movie enthusiasts",
+  "scripts": {
+    "start": "node server/server.js",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "dotenv": "^16.1.4"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

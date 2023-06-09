@@ -1,6 +1,6 @@
 const mongoose = import("mongoose");
 import { Schema, model } from "mongoose";
-import { comment, movieOption } from "./index";
+import { Comment, movieOption } from "./index";
 
 const moviePollSchema = new Schema({
   title: {
@@ -14,7 +14,7 @@ const moviePollSchema = new Schema({
   username: { type: String, required: true },
   genre: { type: String },
   options: [movieOption],
-  comments: [comment],
+  comments: [Comment],
 });
 
 export const MoviePoll = model("MoviePoll", moviePollSchema);

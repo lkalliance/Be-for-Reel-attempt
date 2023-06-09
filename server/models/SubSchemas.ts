@@ -18,7 +18,7 @@ export const movieOption = new Schema({
   rank_votes: [Number],
 });
 
-export const comment = new Schema({
+export const Comment = new Schema({
   user_id: { type: String, required: true },
   poll_id: { type: String, required: true },
   username: { type: String, required: true },
@@ -27,7 +27,7 @@ export const comment = new Schema({
   content: { type: String, required: true },
 });
 
-export const userVote = new Schema({
+export const Vote = new Schema({
   poll_id: {
     type: String,
     required: true,
