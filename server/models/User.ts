@@ -1,14 +1,6 @@
 const mongoose = import("mongoose");
 import { Schema, model } from "mongoose";
-import { comment, MoviePoll, movieOption } from "./index";
-
-const userVoteSchema = new Schema({
-  poll_id: {
-    type: String,
-    required: true,
-  },
-  option: movieOption,
-});
+import { comment, MoviePoll, userVote } from "./index";
 
 const userSchema = new Schema({
   username: {
@@ -25,7 +17,7 @@ const userSchema = new Schema({
   },
   polls: [MoviePoll.schema],
   comments: [comment],
-  votes: [userVoteSchema],
+  votes: [userVote],
 });
 
 export const User = model("User", userSchema);

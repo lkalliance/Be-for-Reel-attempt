@@ -1,3 +1,4 @@
 export {} from "./User";
-export { comment } from "./Comment";
-export { MoviePoll, movieOption } from "./Polls";
+export { comment, movieOption, userVote } from "./SubSchemas";
+export { MoviePoll } from "./Polls";
+export { User } from "./User";
