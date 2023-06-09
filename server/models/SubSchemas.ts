@@ -33,4 +33,5 @@ export const Vote = new Schema({
     required: true,
   },
   option: movieOption,
+  comment: Comment,
 });

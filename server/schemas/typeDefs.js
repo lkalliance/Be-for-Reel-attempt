@@ -2,112 +2,98 @@ const { gql } = require("apollo-server-express");
 
 export const typeDefs = gql`
   type Auth {
-    token: ID
+    token: ID!
     user: User
   }
 
   type User {
-    _id: ID
-    username: String
-    email: String
-    password: String
-    polls: [MoviePoll]
-    comments: [Comment]
-    votes: [Vote]
+    _id: ID!
+    username: String!
+    email: String!
+    password: String!
+    polls: [MoviePoll!]!
+    comments: [Comment!]!
+    votes: [Vote!]!
   }
 
-  type moviePoll {
-    _id: ID
-    user_id: ID
-    username: String
-    title: String
+  type MoviePoll {
+    _id: ID!
+    user_id: ID!
+    username: String!
+    title: String!
     description: String
     genre: String
-    options: [movieOption]
-    comments: [Comment]
+    options: [movieOption!]!
+    comments: [Comment!]!
   }
 
-  input BookcaseInput {
-    user_id: ID
-    year: String
-    shelves: [ShelfInput]
-    unshelved: [BookInput]
-  }
-
-  type Shelf {
-    _id: ID
-    left: [Book]
-    right: [Book]
-  }
-
-  input ShelfInput {
-    left: [BookInput]
-    right: [BookInput]
-  }
-
-  type Book {
-    _id: ID
-    title: String
-    shortTitle: String
-    authors: [String]
-    image: String
-    description: String
-    color: String
-    height: String
-    thickness: String
-    style: String
-    comment: String
-    rating: Int
-    year: String
-    bookId: String
-  }
-
-  input BookInput {
-    bookId: String!
+  input MoviePollInput {
     title: String!
-    shortTitle: String
-    image: String
     description: String
-    authors: [String]
-    style: String
-    height: String
-    thickness: String
-    color: String
-    year: String
-    rating: Int
+    genre: String
+    options: [movieOptionInput!]!
+  }
+
+  type Comment {
+    _id: ID!
+    user_id: ID!
+    poll_id: ID!
+    username: String!
+    title: String!
+    option: movieOption!
+    content: String!
+  }
+
+  type movieOption {
+    _id: ID!
+    title: String!
+    summary: String
+    stars: String
+    imdb_id: String
+    rating: String
+    trailer: String
+    wikipedia: String
+    image: String
+    genres: [String]!
+    votes: Int!
+    rank_votes: [Int!]
+  }
+
+  input movieOptionInput {
+    title: String!
+    summary: String
+    stars: String
+    imdb_id: String
+    rating: String
+    trailer: String
+    wikipedia: String
+    image: String
+    genres: [String]!
+  }
+
+  type Vote {
+    poll_id: String!
+    option: movieOption!
+    comment: String
+  }
+
+  input VoteInput {
+    poll_id: String!
+    option: ID!
     comment: String
   }
 
   type Query {
-    me(fetchMe: Boolean): User
-    bookcase(year: Int!, fetchMe: Boolean): Bookcase
+    me: User
+    user(id: ID!): User
+    moviePoll(id: ID!): MoviePoll
+    pollList(genre: String, user: ID): [MoviePoll]
   }
 
   type Mutation {
     addUser(userName: String!, email: String!, password: String!): Auth
-    addBookcase(
-      user_id: ID!
-      year: String
-      shelves: [ShelfInput]
-      unshelved: [BookInput]
-    ): Bookcase
-    login(email: String!, password: String!): AuthReturn
-    addBook(
-      title: String!
-      shortTitle: String
-      authors: [String]
-      image: String
-      description: String
-      color: String = "white"
-      height: String = "medium"
-      thickness: String = "mid"
-      style: String = "paperback"
-      bookId: String!
-      rating: Int
-      comment: String
-      year: String
-    ): User
-    removeBook(bookId: String!): User
-    arrangeBookcase(bookcase: BookcaseInput): Bookcase
+    addPoll(user_id: ID!, username: String!, input: MoviePollInput): MoviePoll
+    addVote(user_id: ID!, input: VoteInput): MoviePoll
+    login(username: String!, password: String!): Auth
   }
 `;
