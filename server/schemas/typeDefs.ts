@@ -3,7 +3,13 @@ const { gql } = require("apollo-server-express");
 export const typeDefs = gql`
   type Auth {
     token: ID!
-    user: User
+    user: baseUser
+  }
+
+  type baseUser {
+    _id: ID!
+    username: String!
+    votes: [Vote!]
   }
 
   type User {
@@ -71,6 +77,15 @@ export const typeDefs = gql`
     genres: [String]!
   }
 
+  type pollListing {
+    id: ID!
+    title: String!
+  }
+
+  type pollList {
+    polls: [pollListing]
+  }
+
   type Vote {
     poll_id: String!
     option: movieOption!
@@ -84,7 +99,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    me: User
+    me: baseUser
     user(id: ID!): User
     moviePoll(id: ID!): MoviePoll
     pollList(genre: String, user: ID): [MoviePoll]
